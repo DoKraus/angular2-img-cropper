@@ -214,6 +214,10 @@ export class ImageCropper extends ImageCropperModel {
             ctx.strokeStyle = this.cropperSettings.cropperDrawSettings.strokeColor; // 'rgba(255,228,0,1)';
 
             if (!this.cropperSettings.rounded) {
+                if (bounds.width > this.canvasWidth ||
+                    bounds.height > this.canvasHeight) {
+                  return;
+                }
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
                 ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
                 ctx.drawImage(this.buffer, bounds.left, bounds.top, Math.max(bounds.width, 1),
